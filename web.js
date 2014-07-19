@@ -22,6 +22,7 @@ app.post('/smsapi/receive', function(req, res) {
 	req.on('end', function() {
 		console.log(querystring.parse(requestBody));
 	});
+	console.log("MESSAGE Received!");
 	res.send('Accepted');
 });
 
@@ -36,6 +37,7 @@ app.post('/smsapi/notify', function(req, res) {
 	req.on('end', function() {
 		console.log(querystring.parse(requestBody));
 	});
+	console.log("MESSAGE NOTIFIED");
 	res.send('Accepted');
 });
 
