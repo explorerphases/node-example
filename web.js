@@ -11,15 +11,33 @@ app.get('/', function(req, res) {
 	res.send('Hello World!');
 });
 
-app.get('/smsapi/receive', function(req, res) {
-	console.log(querystring.parse(req));
+app.post('/smsapi/receive', function(req, res) {
+	var requestBody = '';
+	req.on('data', function(data) {
+		requestBody += data;
+		if (requestBody.length > 1e7) {
+			res.send('Error');
+		}
+	});
+	req.on('end', function() {
+		console.log(querystring.parse(requestBody));
+	});
 	res.send('Accepted');
 });
 
-app.get('/smsapi/notify', function(req, res) {
-	console.log(querystring.parse(req));
+app.post('/smsapi/notify', function(req, res) {
+	var requestBody = '';
+	req.on('data', function(data) {
+		requestBody += data;
+		if (requestBody.length > 1e7) {
+			res.send('Error');
+		}
+	});
+	req.on('end', function() {
+		console.log(querystring.parse(requestBody));
+	});
 	res.send('Accepted');
-})
+});
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
